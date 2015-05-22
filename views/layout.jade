@@ -1,0 +1,46 @@
+﻿doctype html
+html
+  head
+    title="T411 Server"
+    meta(name="robot", content="noindex")  
+    link(rel="stylesheet", href="http://netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css")
+    link(rel="stylesheet", href="/vendors/video-js/video-js.min.css")
+    link(rel="stylesheet", href="/stylesheets/style.css")    
+    script(src="http://code.jquery.com/jquery-1.11.3.min.js")
+    script(src="http://netdna.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js")
+    script(src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js")
+    script(src="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js")
+    script(src="/vendors/video-js/video.js")
+    script.
+        videojs.options.flash.swf = "/vendors/video-js/video-js.swf";
+  body
+    header.navbar.navbar-static-top.navbar-inverse
+        .container
+            .navbar-header
+                button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target=".bs-navbar-collapse")
+                    span.sr-only Toggle Navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href="/") T411 Server
+            nav.collapse.navbar-collapse.bs-navbar-collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href="/top/100") Top 100
+                    li
+                        a(href="/top/today") Torrents du jour
+                    li
+                        a(href="/top/week") Torrents de la semaine
+                    li
+                        a(href="/top/month") Torrents du mois
+                    li
+                        a(href="/now")  En cours
+                form.navbar-form.navbar-right(role="search",action="/search")
+                    .input-group
+                        input.form-control(type="text",placeholders="Search",name="q")
+                        span.input-group-btn
+                            button.btn.btn-default(type="submit")
+                                span.glyphicon.glyphicon-search
+    .container.page-body
+        block content

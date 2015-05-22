@@ -1,0 +1,23 @@
+﻿extends layout
+
+block content
+    table.table.table-striped.table-bordered(id="results",data-order="[[ 1, \"asc\" ]]",data-page-length="100")
+        thead
+            tr
+                th Catégorie
+                th Nom
+                th
+        tbody
+            for torrent in streamingProcesses
+                tr
+                    td #{torrent.details.categoryname}
+                    td
+                        a(href="/stream/#{torrent.id}") #{torrent.details.name}
+                    td
+                        a(href="/stop/#{torrent.id}",title="Stop streaming")
+                            span.glyphicon.glyphicon-remove
+    script.
+        $(function() {
+            $('#results').dataTable();
+        });
+

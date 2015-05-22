@@ -1,0 +1,23 @@
+﻿extends layout
+
+block content
+    table.table.table-striped.table-bordered(id="results",data-order="[[ 2, \"desc\" ]]",data-page-length="100")
+        thead
+            tr
+                th Catégorie
+                th Nom
+                th Seeders
+                th Leechers
+        tbody
+            for torrent in results
+                tr
+                    td #{torrent.categoryname}
+                    td
+                        a(href="/stream/#{torrent.id}") #{torrent.name}
+                    td #{torrent.seeders}
+                    td #{torrent.leechers}
+    script.
+        $(function() {
+            $('#results').dataTable();
+        });
+
