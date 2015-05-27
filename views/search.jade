@@ -1,0 +1,34 @@
+﻿extends layout
+
+block content
+    h1 Recherche:
+        span #{query}
+    table.table.table-striped.table-bordered(id="results",data-order="[[ 2, \"desc\" ]]",data-page-length="100")
+        thead
+            tr
+                th Catégorie
+                th Nom
+                th Seeders
+                th Leechers
+        tbody
+            for torrent in results
+                tr
+                    td #{torrent.categoryname}
+                    td
+                        a(href="/stream/#{torrent.id}") #{torrent.name}
+                    td #{torrent.seeders}
+                    td #{torrent.leechers}
+    nav
+        ul.pager
+            li(class="#{previousClass}")
+                a(href="/search?q=#{query}&offset=#{previousOffset}").
+                    #[span(aria-hidden="true") &larr;] Précédent
+            li(class="#{nextClass}")
+                a(href="/search?q=#{query}&offset=#{nextOffset}").
+                    Suivant #[span(aria-hidden="true") &rarr;]
+    script.
+        $(function() {
+            $('#results').dataTable({paging: false});
+        });
+    style.
+        .dataTables_info { display:none }

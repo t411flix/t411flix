@@ -13,11 +13,28 @@ router.get('/', function (req, res) {
 router.get('/search', function (req, res) {
     client.auth(config.auth.login, config.auth.password, function (err) {
         if (err) throw err;
-
-        client.search(req.query.q, {limit:100}, function (err, results) {
+        
+        var offset = typeof req.query.offset == 'undefined' ? 0 : parseInt(req.query.offset);
+        
+        client.get('/torrents/search/' + req.query.q, { limit: 100,offset: offset }, function (err, results) {
             if (err) throw err;
-            res.render('results', { results: results.torrents });
+            var previousOffset = (offset - 100 < 0) ? 0 : offset - 100;
+            var previousClass = (previousOffset == 0) ? 'disabled' : '';
+            var nextOffset = offset + 100 > results.total ? offset: offset + 100;
+            var nextClass = (nextOffset == offset) ? 'disabled' : '';
+            res.render('search', 
+                {
+                results: results.torrents, 
+                offset: results.offset, 
+                total: results.total, 
+                query: results.query,
+                previousOffset: previousOffset,
+                previousClass: previousClass,
+                nextOffset: nextOffset,
+                nextClass: nextClass
+            });
         });
+
 
     });       
 });
