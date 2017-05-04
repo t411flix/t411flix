@@ -11,19 +11,12 @@ A nodejs web server to stream torrents from t411.io built using Express and Peer
 
 4. Edit config.js and set your login and password
 
-5. Start the server: `node bin/www`
+5. Start the server: `T411_API_HOST=api.t411.al node bin/www`
 
 ## Issue
 
-if you have this error:
-`
-undefined:1
-string(5) "1.2.4"
-^
-SyntaxError: Unexpected token s
-`
+if you have an error:
 
-edit node_modules/t411/index.js and change API_HOST to api.t411.in
+`Hostname/IP doesn't match certificate's altnames`
 
-Thanks to HazCod for pointing this out
-
+check the api hostname

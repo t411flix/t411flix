@@ -1,9 +1,13 @@
 ﻿extends layout
 
 block content
-    p.buffer-message Buffering please wait...
-    .flash-container
-    div.player
+  div.row
+    div.col-xs-12.col-md-8
+      p.buffer-message Buffering please wait...
+      .flash-container
+      div.embed-responsive.embed-responsive-16by9
+        div.embed-responsive-item
+          div.player
     script.
         streamUrl="#{streamUrl}";
         $(function() {
@@ -16,16 +20,19 @@ block content
                 else {
 
                 $('.buffer-message').hide();
-
-                var video = '<video id="player" class="video-js vjs-default-skin center-block" controls preload="auto" width="auto" height="auto" >';
+                
+                var video = '<video id="player" class="video-js vjs-default-skin" controls preload="auto" width="" height="" >';
 
                 video += '<source src=' + streamUrl + ' type="video/mp4">';
 
-                video +=  '/></video>';
+                video +=  '</video>';
                 
                 $('.player').append(video);
-                _V_('player');
-                _V_('player').play();
+                videojs('player', {
+                  techOrder: ["flash","html5"],
+                  fluid: true
+                });
+                videojs('player').play();
                 
 
                 }
